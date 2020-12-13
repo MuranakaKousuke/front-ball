@@ -1,9 +1,10 @@
 body {
   margin: 0;
+  font-size: 10px;
+  background-color: #ededed;
   font-family: -apple-system, BlinkMacSystemFont,　"ＭＳ ゴシック", 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  font-size: 10px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

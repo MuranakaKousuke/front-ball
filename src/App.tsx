@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Player from '../src/components/pages/Player';
+import Player from './views/pages/Player';
 
 
 function App() {
@@ -15,6 +15,22 @@ function App() {
 export default App;
 
 const Container = styled.div`
-  width: 360px;
   margin: 0 auto;
+  background-color: white;
+  /* スマホ用 */
+  @media screen and (max-width: 600px) {
+    max-width: 400px;
+    min-width: 320px;
+    color: red;
+  }
+  /* タブレット用 */
+  @media screen and (max-width: 1024px) and (min-width: 600px) {
+    max-width: 600px;
+    color: orange;
+  }
+  /* PC用 */
+  @media screen and (min-width: 1024px) {
+    max-width: 960px;
+    color: green;
+  }
 `

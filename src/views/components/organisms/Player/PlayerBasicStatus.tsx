@@ -5,7 +5,7 @@ import yashima from '../../../../src/images/yashima.png';
 
 import { NameLabel, StatusLabel, BasicStatusLabel } from '../../atoms/Label';
 import { MainPositionText, SubPositionText, SmallText } from '../../atoms/Text';
-import { TeamImage, PlayerImage } from '../../../components/atoms/Image';
+import { TeamImage, PlayerImage } from '../../atoms/Image';
 import Uniform from '../../atoms/Uniform';
 
 const PlayerBasicStatus = () => {

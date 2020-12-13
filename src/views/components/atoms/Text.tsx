@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // --------------- 抽象 --------------- //
-type Props = {
-  children: React.ReactNode;
+type StyledProps = {
   color: string;
   fontSize?: string;
   fontWeight?: string;
@@ -11,7 +10,11 @@ type Props = {
   textAlign?: string;
 }
 
-const StyledText = styled.p<Props>`
+type ComponentsProps = {
+  children: string;
+}
+
+const StyledText = styled.p<StyledProps>`
   color: ${({color}) => color};
   font-size: ${({fontSize}) => fontSize ? fontSize : '1em'};
   font-weight: ${({fontWeight}) => fontWeight ? fontWeight : 'normal'};
@@ -19,7 +22,7 @@ const StyledText = styled.p<Props>`
   text-align: ${({textAlign}) => textAlign ? textAlign : 'left'};
 `
 
-const Text: React.FC<Props> = ({
+const Text: React.FC<ComponentsProps & StyledProps> = ({
   children,
   color,
   fontSize,
@@ -43,13 +46,8 @@ const Text: React.FC<Props> = ({
 export default Text;
 
 // --------------- 具象 --------------- //
-// childrenのみをPropsとして受け取る
-type TextProps = {
-  children: React.ReactNode;
-}
-
 // --------------- 小さめテキスト --------------- //
-export const SmallText: React.FC<TextProps> = ({
+export const SmallText: React.FC<ComponentsProps> = ({
   children
 }) => {
   return (
@@ -65,7 +63,7 @@ export const SmallText: React.FC<TextProps> = ({
 }
 
 // --------------- メインポジションテキスト --------------- //
-export const MainPositionText: React.FC<TextProps> = ({
+export const MainPositionText: React.FC<ComponentsProps> = ({
   children
 }) => {
   return (
@@ -81,7 +79,7 @@ export const MainPositionText: React.FC<TextProps> = ({
 }
 
 // --------------- サブポジションテキスト --------------- //
-export const SubPositionText: React.FC<TextProps> = ({
+export const SubPositionText: React.FC<ComponentsProps> = ({
   children
 }) => {
   return (
@@ -97,7 +95,7 @@ export const SubPositionText: React.FC<TextProps> = ({
 }
 
 // --------------- ステータス数値テキスト --------------- //
-export const StatusText: React.FC<TextProps> = ({
+export const StatusText: React.FC<ComponentsProps> = ({
   children
 }) => {
   return (
@@ -114,7 +112,7 @@ export const StatusText: React.FC<TextProps> = ({
 }
 
 // --------------- 弾道テキスト --------------- //
-export const BallisticText: React.FC<TextProps> = ({
+export const BallisticText: React.FC<ComponentsProps> = ({
   children
 }) => {
   return (
@@ -176,7 +174,7 @@ const lankColorCreator = (status: number): string => {
     case status >= 1 && status < 20:
       return '#808080';
     default:
-      return '#808080'
+      return '#808080';
   }
 }
 

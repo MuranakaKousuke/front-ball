@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { StatusLabel } from '../../atoms/Label';
-import { BallisticText, StatusLankText, StatusText } from '../../../components/atoms/Text';
+import { BallisticText, StatusLankText, StatusText } from '../../atoms/Text';
 
 const PlayerStatus = () => {
   return(
