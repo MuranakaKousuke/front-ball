@@ -21,16 +21,13 @@ const Container = styled.div`
   @media screen and (max-width: 600px) {
     max-width: 400px;
     min-width: 320px;
-    color: red;
   }
   /* タブレット用 */
   @media screen and (max-width: 1024px) and (min-width: 600px) {
     max-width: 600px;
-    color: orange;
   }
   /* PC用 */
   @media screen and (min-width: 1024px) {
     max-width: 960px;
-    color: green;
   }
 `

@@ -124,34 +124,6 @@ export const LargeText: React.FC<ComponentsProps & StyledProps> = ({
   );
 }
 
-// --------------- メインポジションテキスト --------------- //
-export const MainPositionText: React.FC<ComponentsProps> = ({
-  children
-}) => {
-  return (
-    <MediumText
-      color={TextColor.DEFAULT}
-      fontWeight='bold'
-    >
-      {children}
-    </MediumText>
-  );
-}
-
-// --------------- サブポジションテキスト --------------- //
-export const SubPositionText: React.FC<ComponentsProps> = ({
-  children
-}) => {
-  return (
-    <SmallerText
-      color={TextColor.DEFAULT}
-      fontWeight='normal'
-    >
-      {children}
-    </SmallerText>
-  );
-}
-
 // --------------- ステータス数値テキスト --------------- //
 export const StatusText: React.FC<ComponentsProps> = ({
   children

@@ -8,7 +8,7 @@ type StyledProps = {
   fontWeight?: string;
   letterSpacing?: string;
   display: string;
-  width: string;
+  width?: string;
   textAlign: string;
   backgroundColor: string;
   borderRadius: string;
@@ -25,7 +25,7 @@ const StyledLabel = styled.span<StyledProps>`
   font-weight: ${({fontWeight}) => fontWeight ? fontWeight : 'normal'};
   letter-spacing: ${({letterSpacing}) => letterSpacing ? letterSpacing : '0px'};
   display: ${({display}) => display};
-  width: ${({width}) => width};
+  width: ${({width}) => width ? width : '100%'};
   text-align: ${({textAlign}) => textAlign};
   background-color: ${({backgroundColor}) => backgroundColor};
   border-radius: ${({borderRadius}) => borderRadius};
@@ -87,7 +87,7 @@ export const NameLabel: React.FC<ComponentsProps> = ({
   );
 }
 // --------------- 基本情報ステータス名ラベル --------------- //
-export const BasicStatusLabel: React.FC<ComponentsProps> = ({
+export const BasicLabel: React.FC<ComponentsProps> = ({
   children,
 }) => {
   return (
@@ -97,7 +97,7 @@ export const BasicStatusLabel: React.FC<ComponentsProps> = ({
       fontWeight='bold'
       backgroundColor="#ffffff"
       display='inline-block'
-      width='30px'
+      width='60px'
       borderRadius='5px'
       textAlign='center'
       border='solid 1px #215671'
@@ -106,7 +106,16 @@ export const BasicStatusLabel: React.FC<ComponentsProps> = ({
     </Label>
   );
 }
-// --------------- 能力ステータス名ラベル --------------- //
+
+// --------------- 基本情報ステータス名ラベル --------------- //
+const statusLabelWidthCreator = () => {
+  const mq = window.matchMedia('(max-width: 600px)');
+  if (mq.matches) {
+    return '100%';
+  } else {
+    return '60px';
+  }
+};
 export const StatusLabel: React.FC<ComponentsProps> = ({
   children,
 }) => {
@@ -117,7 +126,7 @@ export const StatusLabel: React.FC<ComponentsProps> = ({
       fontWeight='bold'
       backgroundColor="#ffffff"
       display='inline-block'
-      width='50px'
+      width={statusLabelWidthCreator()}
       borderRadius='5px'
       textAlign='center'
       border='solid 1px #215671'

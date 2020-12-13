@@ -1,68 +1,86 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import PlayerHeader from '../organisms/Player/PlayerHeader';
+
+import { StatusLabel } from '../atoms/Label';
+import { StatusText, BallisticText, StatusLankText } from '../atoms/InlineText';
+
 const Player = () => {
   return (
     <Container>
-      <PlayerHeader>
-        <PlayerBasic>
-          <div>
-            <div>村中</div>
-            <div>ポジション：二</div>
-          </div>
-          <div>画像</div>
-        </PlayerBasic>
-        <div>
-          <div>成績</div>
-          <PlayerBasicStatus>
-            <div>フォーム：スタンダード1</div>
-            <div>投打：右投右打</div>
-          </PlayerBasicStatus>
-        </div>
-      </PlayerHeader>
+      <PlayerHeader />
       <PlayerStatusWrapper>
-        <PlayerStatus>
-          <div>弾道</div>
-          <div>ミート</div>
-          <div>パワー</div>
-          <div>走力</div>
-          <div>肩力</div>
-          <div>守備力</div>
-          <div>捕球力</div>
-        </PlayerStatus>
+        <PlayerStatusList>
+          <PlayerStatus>
+            <StatusLabel>弾道</StatusLabel>
+            <BallisticText>↗︎</BallisticText>
+            <StatusText>3</StatusText>
+          </PlayerStatus>
+          <PlayerStatus>
+            <StatusLabel>ミート</StatusLabel>
+            <StatusLankText status={88} />
+            <StatusText>88</StatusText>
+          </PlayerStatus>
+          <PlayerStatus>
+            <StatusLabel>パワー</StatusLabel>
+            <StatusLankText status={91} />
+            <StatusText>91</StatusText>
+          </PlayerStatus>
+          <PlayerStatus>
+            <StatusLabel>走力</StatusLabel>
+            <StatusLankText status={69} />
+            <StatusText>69</StatusText>
+          </PlayerStatus>
+          <PlayerStatus>
+            <StatusLabel>肩力</StatusLabel>
+            <StatusLankText status={70} />
+            <StatusText>70</StatusText>
+          </PlayerStatus>
+          <PlayerStatus>
+            <StatusLabel>守備力</StatusLabel>
+            <StatusLankText status={52} />
+            <StatusText>52</StatusText>
+          </PlayerStatus>
+          <PlayerStatus>
+            <StatusLabel>捕球力</StatusLabel>
+            <StatusLankText status={42} />
+            <StatusText>42</StatusText>
+          </PlayerStatus>
+        </PlayerStatusList>
         <PlayerSpecialStatus>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
-          <div>chance</div>
+          <SpecialStatus>チャンスC</SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
+          <SpecialStatus></SpecialStatus>
         </PlayerSpecialStatus>
       </PlayerStatusWrapper>
     </Container>
@@ -77,28 +95,6 @@ const Container = styled.div`
   @media screen and (min-width: 600px) {
     max-width: 600px;
   }
-`
-const PlayerHeader = styled.div`
-  display: grid;
-  gap: 0.5em;
-  /* スマホ用 */
-  @media screen and (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
-  /* タブレット・PC用 */
-  @media screen and (min-width: 600px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`
-
-const PlayerBasic = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-`
-
-const PlayerBasicStatus = styled.div`
-  display: flex;
-  flex: row;
 `
 
 const PlayerStatusWrapper = styled.div`
@@ -115,18 +111,43 @@ const PlayerStatusWrapper = styled.div`
   }
 `
 
-const PlayerStatus = styled.div`
+const PlayerStatusList = styled.div`
   display: grid;
   /* スマホ用 */
   @media screen and (max-width: 600px) {
     grid-template-columns: repeat(7, 1fr);
+    gap: 0.5em;
   }
   /* タブレット・PC用 */
   @media screen and (min-width: 600px) {
     grid-template-columns: 1fr;
   }
 `
+const PlayerStatus = styled.div`
+  display: flex;
+  /* スマホ用 */
+  @media screen and (max-width: 600px) {
+    flex-direction : column;
+    align-items: center;
+    gap: 0.2em;
+  }
+  /* タブレット・PC用 */
+  @media screen and (min-width: 600px) {
+    flex: row;
+    align-items: center;
+    gap: 1.5em;
+  }
+`
+
+
 const PlayerSpecialStatus = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+`
+
+const SpecialStatus = styled.div`
+  min-height: 1.6em;
+  background-color:#ffffff;
+  border: solid 1px #215671;
+  border-radius: 2px;
 `

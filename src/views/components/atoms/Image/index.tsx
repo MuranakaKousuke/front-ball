@@ -2,20 +2,23 @@ import React from 'react'
 import styled from 'styled-components';
 
 // --------------- 抽象 --------------- //
-type Props = {
-  src: string;
+type StyledProps = {
   width?: string;
   height?: string;
   display?: string;
 };
 
-const StyledImage = styled.img<Props>`
+type ComponentProps = {
+  src: string;
+}
+
+const StyledImage = styled.img<StyledProps>`
   width: ${({width}) => width ? width : 'auto'};
   height: ${({height}) => height ? height : 'auto'};
   display: ${({display}) => display ? display : 'block'};
 `
 
-const Image: React.FC<Props> = ({
+const Image: React.FC<ComponentProps & StyledProps> = ({
   src,
   width,
   height,
@@ -34,13 +37,8 @@ const Image: React.FC<Props> = ({
 export default Image;
 
 // --------------- 具象 --------------- //
-// childrenのみをPropsとして受け取る
-type ImageProps = {
-  src: string;
-}
-
 // --------------- チーム画像 --------------- //
-export const TeamImage: React.FC<ImageProps> = ({
+export const TeamImage: React.FC<ComponentProps> = ({
   src
 }) => {
   return (
@@ -53,13 +51,13 @@ export const TeamImage: React.FC<ImageProps> = ({
 }
 
 // --------------- 選手画像 --------------- //
-export const PlayerImage: React.FC<ImageProps> = ({
+export const PlayerImage: React.FC<ComponentProps> = ({
   src
 }) => {
   return (
     <Image
       src={src}
-      width='49px'
+      width='50px'
       display='inline-block'
     />
   );
