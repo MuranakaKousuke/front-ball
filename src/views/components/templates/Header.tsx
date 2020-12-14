@@ -9,7 +9,7 @@ import logo from '../../../../src/images/logo.png';
 
 
 const Header: React.FC = () => {
-  const login = true;
+  const login = false;
 
   return(
     <StyledHeader>
@@ -32,7 +32,7 @@ const Header: React.FC = () => {
           <LinkWrapper>
             <Link to='/'>トップ</Link>
             <Link to='/signup'>新規登録</Link>
-            <Link to='/login/new'>ログイン</Link>
+            <Link to='/players/1'>ログイン</Link>
           </LinkWrapper>
         }
       </Wrapper>
