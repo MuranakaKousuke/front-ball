@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PlayerHeader from '../organisms/Player/PlayerHeader';
 
 import { StatusLabel } from '../atoms/Label';
-import { StatusText, BallisticText, StatusLankText } from '../atoms/InlineText';
+import { SmallText , StatusText, BallisticText, StatusLankText, SpecialLabelText, SpecialLankText } from '../atoms/InlineText';
 
 const Player = () => {
   return (
@@ -49,14 +49,38 @@ const Player = () => {
           </PlayerStatus>
         </PlayerStatusList>
         <PlayerSpecialStatus>
-          <SpecialStatus>チャンスC</SpecialStatus>
-          <SpecialStatus></SpecialStatus>
-          <SpecialStatus></SpecialStatus>
-          <SpecialStatus></SpecialStatus>
-          <SpecialStatus></SpecialStatus>
-          <SpecialStatus></SpecialStatus>
-          <SpecialStatus></SpecialStatus>
-          <SpecialStatus></SpecialStatus>
+          <SpecialStatus>
+            <SpecialLabelText status={88}>チャンス</SpecialLabelText>
+            <SpecialLankText status={88} />
+          </SpecialStatus>
+          <SpecialStatus>
+            <SpecialLabelText status={91}>対左投手</SpecialLabelText>
+            <SpecialLankText status={91} />
+          </SpecialStatus>
+          <SpecialStatus>
+            <SpecialLabelText status={42}>キャッチャー</SpecialLabelText>
+            <SpecialLankText status={42} />
+          </SpecialStatus>
+          <SpecialStatus>
+            <SpecialLabelText status={18}>ケガしにくさ</SpecialLabelText>
+            <SpecialLankText status={18} />
+          </SpecialStatus>
+          <SpecialStatus>
+            <SpecialLabelText status={52}>盗塁</SpecialLabelText>
+            <SpecialLankText status={52} />
+          </SpecialStatus>
+          <SpecialStatus>
+            <SpecialLabelText status={69}>走塁</SpecialLabelText>
+            <SpecialLankText status={69} />
+          </SpecialStatus>
+          <SpecialStatus>
+            <SpecialLabelText status={21}>送球</SpecialLabelText>
+            <SpecialLankText status={21} />
+          </SpecialStatus>
+          <SpecialStatus>
+            <SpecialLabelText status={70}>回復</SpecialLabelText>
+            <SpecialLankText status={70} />
+          </SpecialStatus>
           <SpecialStatus></SpecialStatus>
           <SpecialStatus></SpecialStatus>
           <SpecialStatus></SpecialStatus>
@@ -139,14 +163,17 @@ const PlayerStatus = styled.div`
   }
 `
 
-
 const PlayerSpecialStatus = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 `
 
 const SpecialStatus = styled.div`
-  min-height: 1.6em;
+  min-height: 1.2em;
+  text-align: center;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 4fr 1fr;
   background-color:#ffffff;
   border: solid 1px #215671;
   border-radius: 2px;

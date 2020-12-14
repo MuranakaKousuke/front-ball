@@ -108,6 +108,7 @@ export const BasicLabel: React.FC<ComponentsProps> = ({
 }
 
 // --------------- 基本情報ステータス名ラベル --------------- //
+// TODO: レスポンシブになるよう修正する
 const statusLabelWidthCreator = () => {
   const mq = window.matchMedia('(max-width: 600px)');
   if (mq.matches) {

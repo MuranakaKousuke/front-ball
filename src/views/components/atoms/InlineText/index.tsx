@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TextColor, LankColor } from "../../../../utils/color";
+
+import { TextColor } from "../../../../utils/color";
+import { lankCreator, lankColorCreator, specialLabelColorCreator, specialLankColorCreator } from '../../../../utils/caliculators';
 
 // --------------- 抽象 --------------- //
 type StyledProps = {
   color?: string;
+  backgroundColor?: string;
   fontSize?: string;
   fontWeight?: string;
 }
@@ -15,6 +18,7 @@ type ComponentsProps = {
 
 const StyledText = styled.span<StyledProps>`
   color: ${({color}) => color ? color: TextColor.DEFAULT};
+  background-color: ${({backgroundColor}) => backgroundColor ? backgroundColor : 'white'};
   font-size: ${({fontSize}) => fontSize ? fontSize : '1.6em'};
   font-weight: ${({fontWeight}) => fontWeight ? fontWeight : 'normal'};
 `
@@ -22,12 +26,14 @@ const StyledText = styled.span<StyledProps>`
 const InlineText: React.FC<ComponentsProps & StyledProps> = ({
   children,
   color,
+  backgroundColor,
   fontSize,
   fontWeight,
 }) => {
   return (
     <StyledText
       color={color}
+      backgroundColor={backgroundColor}
       fontSize={fontSize}
       fontWeight={fontWeight}
     >
@@ -43,11 +49,13 @@ export default InlineText;
 export const SmallText: React.FC<ComponentsProps & StyledProps> = ({
   children,
   color,
+  backgroundColor,
   fontWeight
 }) => {
   return (
     <InlineText
       color={color}
+      backgroundColor={backgroundColor}
       fontWeight={fontWeight}
       fontSize='1em'
     >
@@ -60,11 +68,13 @@ export const SmallText: React.FC<ComponentsProps & StyledProps> = ({
 export const SmallerText: React.FC<ComponentsProps & StyledProps> = ({
   children,
   color,
+  backgroundColor,
   fontWeight
 }) => {
   return (
     <InlineText
       color={color}
+      backgroundColor={backgroundColor}
       fontWeight={fontWeight}
       fontSize='1.4em'
     >
@@ -77,11 +87,13 @@ export const SmallerText: React.FC<ComponentsProps & StyledProps> = ({
 export const MediumText: React.FC<ComponentsProps & StyledProps> = ({
   children,
   color,
+  backgroundColor,
   fontWeight
 }) => {
   return (
     <InlineText
       color={color}
+      backgroundColor={backgroundColor}
       fontWeight={fontWeight}
       fontSize='1.6em'
     >
@@ -94,11 +106,13 @@ export const MediumText: React.FC<ComponentsProps & StyledProps> = ({
 export const LargerText: React.FC<ComponentsProps & StyledProps> = ({
   children,
   color,
+  backgroundColor,
   fontWeight
 }) => {
   return (
     <InlineText
       color={color}
+      backgroundColor={backgroundColor}
       fontWeight={fontWeight}
       fontSize='1.8em'
     >
@@ -111,11 +125,13 @@ export const LargerText: React.FC<ComponentsProps & StyledProps> = ({
 export const LargeText: React.FC<ComponentsProps & StyledProps> = ({
   children,
   color,
+  backgroundColor,
   fontWeight
 }) => {
   return (
     <InlineText
       color={color}
+      backgroundColor={backgroundColor}
       fontWeight={fontWeight}
       fontSize='2em'
     >
@@ -156,53 +172,7 @@ export const BallisticText: React.FC<ComponentsProps> = ({
 type StatusProps = {
   status: number;
 }
-// --------------- ステータスランクテキスト --------------- //
-const lankCreator = (status: number): string => {
-  switch (true) {
-    case status >= 90:
-      return 'S';
-    case status >= 80 && status < 90:
-      return 'A';
-    case status >= 70 && status < 80:
-      return 'B';
-    case status >= 60 && status < 70:
-      return 'C';
-    case status >= 50 && status < 60:
-      return 'D';
-    case status >= 40 && status < 50:
-      return 'E';
-    case status >= 20 && status < 40:
-      return 'F';
-    case status >= 1 && status < 20:
-      return 'G';
-    default:
-      return '?'
-  }
-}
-
-const lankColorCreator = (status: number): string => {
-  switch (true) {
-    case status >= 90 && status <= 100:
-      return LankColor.S;
-    case status >= 80 && status < 90:
-      return LankColor.A;
-    case status >= 70 && status < 80:
-      return LankColor.B;
-    case status >= 60 && status < 70:
-      return LankColor.C;
-    case status >= 50 && status < 60:
-      return LankColor.D;
-    case status >= 40 && status < 50:
-      return LankColor.E;
-    case status >= 20 && status < 40:
-      return LankColor.F;
-    case status >= 1 && status < 20:
-      return LankColor.G;
-    default:
-      return TextColor.BLACK;
-  }
-}
-
+// --------------- 基本ステータスランクテキスト --------------- //
 export const StatusLankText: React.FC<StatusProps> = ({
   status
 }) => {
@@ -214,5 +184,45 @@ export const StatusLankText: React.FC<StatusProps> = ({
     >
       {lankCreator(status)}
     </LargeText>
+  );
+}
+
+// --------------- statusを能力値として受け取る--------------- //
+type SpecialLabelProps = {
+  children: string;
+  status: number;
+}
+// --------------- 特殊能力ラベルテキスト --------------- //
+export const SpecialLabelText: React.FC<SpecialLabelProps> = ({
+  children,
+  status
+}) => {
+  const colorObj = specialLabelColorCreator(status);
+  return (
+    <SmallText
+      color={colorObj.color}
+      backgroundColor={colorObj.backGroundColor}
+      fontSize='1.2em'
+      fontWeight={colorObj.fontWeight}
+    >
+      {children}
+    </SmallText>
+  );
+}
+
+// --------------- 特殊能力ステータスランクテキスト --------------- //
+export const SpecialLankText: React.FC<StatusProps> = ({
+  status
+}) => {
+  const colorObj = specialLankColorCreator(status);
+  return (
+    <SmallText
+      color={colorObj.color}
+      backgroundColor={colorObj.backGroundColor}
+      fontSize='1.2em'
+      fontWeight='bold'
+    >
+      {lankCreator(status)}
+    </SmallText>
   );
 }

@@ -2,6 +2,7 @@ export const TextColor = {
   DEFAULT: '#215671',
   BLACK: '#1f1400',
   RED: 'red',
+  WHITE: 'white',
 }
 
 export const LankColor = {
