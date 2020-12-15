@@ -16,13 +16,9 @@ export interface DeleteUserAction {
 export type UserActionsTypes = FetchUserAction | DeleteUserAction
 
 // -------------------- Action Creator --------------------
-export const fetchUser = (): UserActionsTypes => ({
+export const fetchUser = (data: User): UserActionsTypes => ({
   type: FETCH_USER,
-  payload: {
-    login: true,
-    id: 1,
-    name: 'muranaka'
-  }
+  payload: data
 })
 
 export const deleteUser = (): UserActionsTypes => ({

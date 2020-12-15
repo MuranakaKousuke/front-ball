@@ -9,14 +9,18 @@ import menu from '../../../../src/images/menu.png';
 import logo from '../../../../src/images/logo.png';
 import { AppState } from '../../../store/store';
 
+import { useDispatch } from 'react-redux';
+import { deleteUser } from '../../../store/user/actions';
+
 
 const Header: React.FC = () => {
-  const login = useSelector((state: AppState) => state.user.login);
+  const userState = useSelector((state: AppState) => state.user);
+  const dispatch = useDispatch();
 
   return(
     <StyledHeader>
       <Wrapper>
-        {login ?
+        {userState.login ?
           <LinkWrapper>
             <Menu to='/players/1'>
               <Image width='20px' height='20px' display='inline-block' src={menu} />
@@ -26,15 +30,23 @@ const Header: React.FC = () => {
               <Image width='20px' height='20px' display='inline-block' src={logo} />
             </Logo>
             <MenuList>
-              <StyledLink to='/players'>muranaka</StyledLink>
-              <StyledLink to='/players/1'>ログアウト</StyledLink>
+              <StyledLink to='/players'>{userState.name}</StyledLink>
+              <StyledLink to='/' onClick={() => dispatch(deleteUser())}>ログアウト</StyledLink>
             </MenuList>
           </LinkWrapper>
         :
           <LinkWrapper>
-            <Link to='/'>トップ</Link>
-            <Link to='/signup'>新規登録</Link>
-            <Link to='/players/1'>ログイン</Link>
+            <Menu to='/players/1'>
+              <Image width='20px' height='20px' display='inline-block' src={menu} />
+            </Menu>
+            <Logo to='/'>
+              <LargeText fontWeight='bold' backgroundColor='#8cc640' color='white'>クサプロ</LargeText>
+              <Image width='20px' height='20px' display='inline-block' src={logo} />
+            </Logo>
+            <MenuList>
+              <StyledLink to='/signup'>新規登録</StyledLink>
+              <StyledLink to='/login/new'>ログイン</StyledLink>
+            </MenuList>
           </LinkWrapper>
         }
       </Wrapper>

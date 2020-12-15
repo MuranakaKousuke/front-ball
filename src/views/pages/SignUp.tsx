@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
-import { useDispatch } from 'react-redux';
-import { fetchUser } from '../../store/user/actions';
+import { useHistory } from 'react-router-dom';
 
 type FormData = {
   name: string;
@@ -14,19 +13,26 @@ type FormData = {
 };
 
 const SignUp = () => {
-  const dispatch = useDispatch();
+  const history = useHistory();
+
   const { register, handleSubmit } = useForm<FormData>();
   const onSubmit = handleSubmit(({ name, password, passwordConfirmation }) => {
-    console.log(name, password, passwordConfirmation);
-    dispatch(fetchUser())
-    // axios.post('http://localhost:3001/users', {
-    //   name: name,
-    //   password: password,
-    //   password_confirmation: passwordConfirmation
-    // })
-    // .then((res) => {
-    //   console.log(res)
-    // })
+    axios.post('http://localhost:3001/users', {
+      name: name,
+      password: password,
+      password_confirmation: passwordConfirmation
+    })
+    .then((res) => {
+      if (res.data.results) {
+        console.log('登録に成功しました!')
+        history.push('login/new')
+      } else {
+        console.log('登録に失敗しました!')
+      }
+    })
+    .catch((error) => {
+      console.log('エラーが発生しました')
+    })
   });
 
   return (
