@@ -31,7 +31,15 @@ const Header: React.FC = () => {
             </Logo>
             <MenuList>
               <StyledLink to='/players'>{userState.name}</StyledLink>
-              <StyledLink to='/' onClick={() => dispatch(deleteUser())}>ログアウト</StyledLink>
+              <StyledLink
+                to='/'
+                onClick={() => {
+                  localStorage.removeItem('user');
+                  dispatch(deleteUser())
+                }}
+              >
+                ログアウト
+              </StyledLink>
             </MenuList>
           </LinkWrapper>
         :

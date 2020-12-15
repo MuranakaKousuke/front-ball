@@ -1,6 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { AppState } from './store/store';
+import { fetchUser } from './store/user/actions';
 
 import Container from './views/components/templates/Container';
 import Top from './views/pages/Top';
@@ -11,6 +14,16 @@ import SignIn from './views/pages/SignIn';
 
 
 function App() {
+  const dispatch = useDispatch();
+  const login = useSelector((state: AppState) => state.user.login)
+
+  React.useEffect(() => {
+    if (!login) {
+      const user = localStorage.getItem('user');
+      user && dispatch(fetchUser(JSON.parse(user)))
+    }
+  }, [])
+
   return (
     <Router>
       <Container>

@@ -27,6 +27,9 @@ const SignIn: React.FC = () => {
       if (res.data.login) {
         dispatch(fetchUser(res.data))
         history.push('/')
+        // localStrageに保存する
+        const userStrage = res.data
+        localStorage.setItem('user', JSON.stringify(userStrage));
       } else {
         console.log('ログインに失敗しました!')
       }
