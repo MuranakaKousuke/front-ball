@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { LargeText }  from '../atoms/InlineText';
 import Image from '../atoms/Image';
 import menu from '../../../../src/images/menu.png';
 import logo from '../../../../src/images/logo.png';
+import { AppState } from '../../../store/store';
 
 
 const Header: React.FC = () => {
-  const login = false;
+  const login = useSelector((state: AppState) => state.user.login);
 
   return(
     <StyledHeader>

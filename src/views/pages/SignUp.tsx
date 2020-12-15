@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
+import { useDispatch } from 'react-redux';
+import { fetchUser } from '../../store/user/actions';
+
 type FormData = {
   name: string;
   password: string;
@@ -11,17 +14,19 @@ type FormData = {
 };
 
 const SignUp = () => {
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm<FormData>();
   const onSubmit = handleSubmit(({ name, password, passwordConfirmation }) => {
     console.log(name, password, passwordConfirmation);
-    axios.post('http://localhost:3001/users', {
-      name: name,
-      password: password,
-      password_confirmation: passwordConfirmation
-    })
-    .then((res) => {
-      console.log(res)
-    })
+    dispatch(fetchUser())
+    // axios.post('http://localhost:3001/users', {
+    //   name: name,
+    //   password: password,
+    //   password_confirmation: passwordConfirmation
+    // })
+    // .then((res) => {
+    //   console.log(res)
+    // })
   });
 
   return (
