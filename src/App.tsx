@@ -7,7 +7,7 @@ import { fetchTeam } from './store/team/actions';
 
 import Container from './views/components/templates/Container';
 import Top from './views/pages/Top';
-import MyPage from './views/pages/MyPage';
+import MyPage from './views/pages/MyTeam';
 import Player from './views/pages/Player';
 import Players from './views/pages/Players';
 import SignUp from './views/pages/SignUp';

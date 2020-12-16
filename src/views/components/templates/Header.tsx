@@ -22,34 +22,42 @@ const Header: React.FC = () => {
     <StyledHeader>
       <Wrapper>
         {teamState.login ?
-          <LinkWrapper>
-            <MenuRight>
-              <Link to='/players/1'>
-                <Image width='20px' height='20px' display='inline-block' src={menu} />
-              </Link>
-            </MenuRight>
-            <MenuCenter to='/'>
-              <LargeText fontWeight='bold' backgroundColor='#8cc640' color='white'>クサプロ</LargeText>
-              <Image width='20px' height='20px' display='inline-block' src={logo} />
-            </MenuCenter>
-            <MenuLeft>
-              <Link to='/mypage'>{teamState.email}</Link>
-              <Link
-                to='/'
-                onClick={() => {
-                  localStorage.removeItem('team');
-                  dispatch(deleteTeam())
-                }}
-              >
-                ログアウト
-              </Link>
-            </MenuLeft>
-          </LinkWrapper>
+          <>
+            <EmptyBox />
+            <LinkWrapper>
+              <MenuRight>
+                <Link to='/players/1'>
+                  <Image width='20px' height='20px' display='inline-block' src={menu} />
+                </Link>
+              </MenuRight>
+              <MenuCenter to='/'>
+                <LargeText fontWeight='bold' backgroundColor='#8cc640' color='white'>クサプロ</LargeText>
+                <Image width='20px' height='20px' display='inline-block' src={logo} />
+              </MenuCenter>
+              <MenuLeft>
+                <Link to='/mypage'>{teamState.email}</Link>
+                <Link
+                  to='/'
+                  onClick={() => {
+                    localStorage.removeItem('team');
+                    dispatch(deleteTeam())
+                  }}
+                >
+                  ログアウト
+                </Link>
+              </MenuLeft>
+            </LinkWrapper>
+            <EmptyBox />
+          </>
         :
+          <>
+          <EmptyBox />
           <LinkWrapper>
+          <MenuRight>
             <Link to='/players/1'>
               <Image width='20px' height='20px' display='inline-block' src={menu} />
             </Link>
+          </MenuRight>
             <MenuCenter to='/'>
               <LargeText fontWeight='bold' backgroundColor='#8cc640' color='white'>クサプロ</LargeText>
               <Image width='20px' height='20px' display='inline-block' src={logo} />
@@ -59,6 +67,8 @@ const Header: React.FC = () => {
               <Link to='/login/new'>ログイン</Link>
             </MenuLeft>
           </LinkWrapper>
+          <EmptyBox />
+          </>
         }
       </Wrapper>
     </StyledHeader>
@@ -69,29 +79,41 @@ export default Header;
 
 const StyledHeader = styled.header`
   background-color: #8cc640;
-  height: 40px;
+  height: 4em;
 `
 
 const Wrapper = styled.div`
   margin: 0 auto;
   /* スマホ用 */
-  @media screen and (max-width: 600px) {
+  /* @media screen and (max-width: 600px) {
     max-width: 400px;
     min-width: 320px;
-  }
+  } */
   /* タブレット用 */
-  @media screen and (max-width: 1024px) and (min-width: 600px) {
+  /* @media screen and (max-width: 1024px) and (min-width: 600px) {
     max-width: 600px;
-  }
+  } */
   /* PC用 */
   @media screen and (min-width: 1024px) {
-    max-width: 960px;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
   }
 `
 
 const LinkWrapper = styled.div`
-  margin: 0 1em;
   height: 40px;
+  /* スマホ用 */
+  @media screen and (max-width: 600px) {
+    margin: 0 1em;
+  }
+  /* タブレット用 */
+  @media screen and (max-width: 1024px) and (min-width: 600px) {
+    margin: 0 2em;
+  }
+  /* PC用 */
+  @media screen and (min-width: 1024px) {
+    margin: 0 2em;
+  }
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -112,4 +134,8 @@ const MenuCenter = styled(Link)`
 const MenuLeft = styled.div`
   flex: 1;
   text-align: right;
+`
+
+const EmptyBox = styled.div`
+
 `
