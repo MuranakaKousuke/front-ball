@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from './store/store';
+
+import { useComponentWillMount } from './hooks/lifeCycle';
 import { fetchTeam } from './store/team/actions';
 
 import Container from './views/components/templates/Container';
@@ -16,14 +18,15 @@ import SignIn from './views/pages/SignIn';
 
 function App() {
   const dispatch = useDispatch();
-  const login = useSelector((state: AppState) => state.team.login)
+  const login = useSelector((state: AppState) => state.team.login);
 
-  React.useEffect(() => {
+  const loginCheck = () => {
     if (!login) {
       const team = localStorage.getItem('team');
-      team && dispatch(fetchTeam(JSON.parse(team)))
+      team && dispatch(fetchTeam(JSON.parse(team)));
     }
-  }, [])
+  }
+  useComponentWillMount(loginCheck);
 
   return (
     <Router>
