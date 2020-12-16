@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect, RouteProps } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from './store/store';
@@ -20,6 +20,7 @@ function App() {
   const dispatch = useDispatch();
   const login = useSelector((state: AppState) => state.team.login);
 
+  // ---------- willMountで過去のログイン履歴がlocalStorageにあればログインする ----------
   const loginCheck = () => {
     if (!login) {
       const team = localStorage.getItem('team');
@@ -28,16 +29,28 @@ function App() {
   }
   useComponentWillMount(loginCheck);
 
+  // ---------- 未ログインユーザーしか入ることの出来ないページを設定 ----------
+  const GuestRoute = (props: RouteProps) => {
+    if (login) console.log('お探しのページは未ログインユーザーしか入れません')
+    return login ? <Redirect to="/login/new" /> : <Route {...props} />;
+  }
+
+  // ---------- ログインユーザーしか入ることの出来ないページを設定 ----------
+  const PrivateRoute = (props: RouteProps) => {
+    if (!login) console.log('お探しのページはログインユーザーしか入れません')
+    return login ? <Route {...props} /> : <Redirect to="/" />;
+  }
+
   return (
     <Router>
       <Container>
         <Switch>
           <Route exact path='/' component={Top} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/login/new" component={SignIn} />
-          <Route exact path="/mypage" component={MyPage} />
-          <Route exact path="/players" component={Players} />
-          <Route exact path="/players/:id" component={Player} />
+          <GuestRoute exact path="/signup" component={SignUp} />
+          <GuestRoute exact path="/login/new" component={SignIn} />
+          <PrivateRoute exact path="/mypage" component={MyPage} />
+          <PrivateRoute exact path="/players" component={Players} />
+          <PrivateRoute exact path="/players/:id" component={Player} />
           <Redirect to="/" />
         </Switch>
       </Container>
