@@ -16,7 +16,18 @@ const Container: React.FC<ComponentProps> = ({
     <Header />
       <Wrapper>
         <ContactWrapper>お問い合わせはこちら</ContactWrapper>
-        <ContentWrapper>{children}</ContentWrapper>
+        <MainWrapper>
+          <MenusWrapper>
+            <MenuWrapper>チーム編集</MenuWrapper>
+            <MenuWrapper>選手一覧</MenuWrapper>
+            <MenuWrapper>対戦成績</MenuWrapper>
+            <MenuWrapper>対戦相手</MenuWrapper>
+            <PcContactWrapper>お問い合わせはこちら</PcContactWrapper>
+          </MenusWrapper>
+          <ContentWrapper>
+            {children}
+          </ContentWrapper>
+        </MainWrapper>
         <AdsenseWrapper>ここに広告が入ります</AdsenseWrapper>
       </Wrapper>
     <Footer />
@@ -41,9 +52,11 @@ const Wrapper = styled.div`
     gap: 1em 1em;
   }
   /* PC用 */
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1025px) {
+    max-width: 1020px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-columns: 4fr 1fr;
     gap: 1em;
   }
 `
@@ -63,15 +76,16 @@ const ContactWrapper = styled.div`
     min-height: 120px;
   }
   /* PC用 */
-  @media screen and (min-width: 1024px) {
-    order: 1;
+  @media screen and (min-width: 1025px) {
+    /* order: 1;
     margin: 1em 0;
     background-color: blue;
-    min-height: calc(100vh - 10em);
+    min-height: calc(100vh - 10em); */
+    display: none
   }
 `
 
-const ContentWrapper = styled.div`
+const MainWrapper = styled.div`
   margin: 1em auto 0;
   background-color: white;
   width: 100%;
@@ -87,11 +101,41 @@ const ContentWrapper = styled.div`
     min-height: calc(100vh - 23em);
   }
   /* PC用 */
-  @media screen and (min-width: 1024px) {
-    order: 2;
+  @media screen and (min-width: 1025px) {
+    order: 1;
     margin: 1em auto;
     min-height: calc(100vh - 10em);
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 1em;
   }
+`
+
+const MenusWrapper = styled.div`
+  display: none;
+  @media screen and (min-width: 1025px) {
+    display: block;
+    background-color: purple;
+    height: 100%;
+  }
+`
+
+const MenuWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  min-height: 3em;
+  font-size: 1.4em;
+  background-color: yellowgreen;
+`
+
+const PcContactWrapper = styled.div`
+  min-height: 20em;
+  font-size: 1.4em;
+  background-color: blue;
+`
+
+const ContentWrapper = styled.div`
+  margin: 1em;
 `
 
 const AdsenseWrapper = styled.div`
@@ -109,8 +153,8 @@ const AdsenseWrapper = styled.div`
     min-height: calc(100vh - 23em);
   }
   /* PC用 */
-  @media screen and (min-width: 1024px) {
-    order: 3;
+  @media screen and (min-width: 1025px) {
+    order: 2;
     margin: 1em 0;
     background-color: red;
     min-height: 200px;

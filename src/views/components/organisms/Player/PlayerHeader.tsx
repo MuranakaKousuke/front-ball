@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   }
   /* タブレット・PC用 */
   @media screen and (min-width: 600px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 2fr 3fr;
   }
 `
 const PlayerBasicLeft = styled.div`
