@@ -32,13 +32,13 @@ function App() {
   // ---------- 未ログインユーザーしか入ることの出来ないページを設定 ----------
   const GuestRoute = (props: RouteProps) => {
     if (login) console.log('お探しのページは未ログインユーザーしか入れません')
-    return login ? <Redirect to="/login/new" /> : <Route {...props} />;
+    return login ? <Redirect to="/" /> : <Route {...props} />;
   }
 
   // ---------- ログインユーザーしか入ることの出来ないページを設定 ----------
   const PrivateRoute = (props: RouteProps) => {
     if (!login) console.log('お探しのページはログインユーザーしか入れません')
-    return login ? <Route {...props} /> : <Redirect to="/" />;
+    return login ? <Route {...props} /> : <Redirect to="/login/new" />;
   }
 
   return (
