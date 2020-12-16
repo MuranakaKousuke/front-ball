@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { AppState } from '../../../store/store';
+import { deleteTeam } from '../../../store/team/actions';
+
+import Link from '../atoms/Link';
 import { LargeText }  from '../atoms/InlineText';
 import Image from '../atoms/Image';
 import menu from '../../../../src/images/menu.png';
 import logo from '../../../../src/images/logo.png';
-import { AppState } from '../../../store/store';
 
-import { useDispatch } from 'react-redux';
-import { deleteTeam } from '../../../store/team/actions';
+
 
 
 const Header: React.FC = () => {
@@ -22,16 +23,18 @@ const Header: React.FC = () => {
       <Wrapper>
         {teamState.login ?
           <LinkWrapper>
-            <Menu to='/players/1'>
-              <Image width='20px' height='20px' display='inline-block' src={menu} />
-            </Menu>
-            <Logo to='/'>
+            <MenuRight>
+              <Link to='/players/1'>
+                <Image width='20px' height='20px' display='inline-block' src={menu} />
+              </Link>
+            </MenuRight>
+            <MenuCenter to='/'>
               <LargeText fontWeight='bold' backgroundColor='#8cc640' color='white'>クサプロ</LargeText>
               <Image width='20px' height='20px' display='inline-block' src={logo} />
-            </Logo>
-            <MenuList>
-              <StyledLink to='/mypage'>{teamState.email}</StyledLink>
-              <StyledLink
+            </MenuCenter>
+            <MenuLeft>
+              <Link to='/mypage'>{teamState.email}</Link>
+              <Link
                 to='/'
                 onClick={() => {
                   localStorage.removeItem('team');
@@ -39,22 +42,22 @@ const Header: React.FC = () => {
                 }}
               >
                 ログアウト
-              </StyledLink>
-            </MenuList>
+              </Link>
+            </MenuLeft>
           </LinkWrapper>
         :
           <LinkWrapper>
-            <Menu to='/players/1'>
+            <Link to='/players/1'>
               <Image width='20px' height='20px' display='inline-block' src={menu} />
-            </Menu>
-            <Logo to='/'>
+            </Link>
+            <MenuCenter to='/'>
               <LargeText fontWeight='bold' backgroundColor='#8cc640' color='white'>クサプロ</LargeText>
               <Image width='20px' height='20px' display='inline-block' src={logo} />
-            </Logo>
-            <MenuList>
-              <StyledLink to='/signup'>新規登録</StyledLink>
-              <StyledLink to='/login/new'>ログイン</StyledLink>
-            </MenuList>
+            </MenuCenter>
+            <MenuLeft>
+              <Link to='/signup'>新規登録</Link>
+              <Link to='/login/new'>ログイン</Link>
+            </MenuLeft>
           </LinkWrapper>
         }
       </Wrapper>
@@ -94,22 +97,19 @@ const LinkWrapper = styled.div`
   align-items: center;
 `
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-`
-
-const Menu = styled(StyledLink)`
+const MenuRight = styled.div`
   flex: 1;
+  text-align: left;
 `
 
-const Logo = styled(StyledLink)`
+const MenuCenter = styled(Link)`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 `
 
-const MenuList = styled.div`
+const MenuLeft = styled.div`
   flex: 1;
   text-align: right;
 `
