@@ -1,29 +1,29 @@
-import { FETCH_USER, DELETE_USER, UserActionsTypes } from './actions';
+import { FETCH_TEAM, DELETE_TEAM, TeamActionsTypes } from './actions';
 
 // -------------------- InitialState --------------------
-export type userState = {
+export type teamState = {
   login: boolean;
   id: number | null;
-  name: string | null;
+  email: string | null;
 }
 
-export const initialState: userState = {
+export const initialState: teamState = {
   login: false,
   id: null,
-  name: null,
+  email: null,
 }
 
 // -------------------- Reducer --------------------
-const userReducer = (state = initialState, action: UserActionsTypes): userState => {
+const teamReducer = (state = initialState, action: TeamActionsTypes): teamState => {
   switch(action.type){
-    case FETCH_USER:
+    case FETCH_TEAM:
       return {
         ...state,
         login: action.payload.login,
         id: action.payload.id,
-        name: action.payload.name,
+        email: action.payload.email,
       }
-    case DELETE_USER:
+    case DELETE_TEAM:
       return {
         ...state,
         ...initialState,
@@ -33,4 +33,4 @@ const userReducer = (state = initialState, action: UserActionsTypes): userState 
   }
 }
 
-export default userReducer;
+export default teamReducer;

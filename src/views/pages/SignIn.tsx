@@ -3,13 +3,14 @@ import styled from 'styled-components';
 
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+import { RAILS_SERVER } from '../../utils/constants';
 
 import { useDispatch } from 'react-redux';
-import { fetchUser } from '../../store/user/actions';
+import { fetchTeam } from '../../store/team/actions';
 import { useHistory } from 'react-router-dom';
 
 type FormData = {
-  name: string;
+  email: string;
   password: string;
 };
 
@@ -18,18 +19,18 @@ const SignIn: React.FC = () => {
   const history = useHistory();
 
   const { register, handleSubmit } = useForm<FormData>();
-  const onSubmit = handleSubmit(({ name, password }) => {
-    axios.post('http://localhost:3001/login', {
-      name: name,
+  const onSubmit = handleSubmit(({ email, password }) => {
+    axios.post(`${RAILS_SERVER}/login`, {
+      email: email,
       password: password,
     })
     .then((res) => {
       if (res.data.login) {
-        dispatch(fetchUser(res.data))
+        dispatch(fetchTeam(res.data))
         history.push('/')
         // localStrageに保存する
-        const userStrage = res.data
-        localStorage.setItem('user', JSON.stringify(userStrage));
+        const teamStrage = res.data
+        localStorage.setItem('team', JSON.stringify(teamStrage));
       } else {
         console.log('ログインに失敗しました!')
       }
@@ -43,8 +44,8 @@ const SignIn: React.FC = () => {
     <Wrapper>
       <form onSubmit={onSubmit}>
         <div>
-          <label>ユーザーネーム</label>
-          <input name="name" ref={register} />
+          <label>メールアドレス</label>
+          <input name="email" ref={register} />
         </div>
         <div>
           <label>パスワード</label>

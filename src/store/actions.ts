@@ -1,3 +1,3 @@
-import { UserActionsTypes } from './user/actions';
+import { TeamActionsTypes } from './team/actions';
 
-export type AppActions = UserActionsTypes
+export type AppActions = TeamActionsTypes

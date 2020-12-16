@@ -3,11 +3,12 @@ import styled from 'styled-components';
 
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+import { RAILS_SERVER } from '../../utils/constants';
 
 import { useHistory } from 'react-router-dom';
 
 type FormData = {
-  name: string;
+  email: string;
   password: string;
   passwordConfirmation: string;
 };
@@ -16,9 +17,9 @@ const SignUp = () => {
   const history = useHistory();
 
   const { register, handleSubmit } = useForm<FormData>();
-  const onSubmit = handleSubmit(({ name, password, passwordConfirmation }) => {
-    axios.post('http://localhost:3001/users', {
-      name: name,
+  const onSubmit = handleSubmit(({ email, password, passwordConfirmation }) => {
+    axios.post(`${RAILS_SERVER}/teams`, {
+      email: email,
       password: password,
       password_confirmation: passwordConfirmation
     })
@@ -39,8 +40,8 @@ const SignUp = () => {
     <Wrapper>
       <form onSubmit={onSubmit}>
         <div>
-          <label>ユーザーネーム</label>
-          <input name="name" ref={register} />
+          <label>メールアドレス</label>
+          <input name="email" ref={register} />
         </div>
         <div>
           <label>パスワード</label>

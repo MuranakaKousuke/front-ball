@@ -1,12 +1,12 @@
 import { combineReducers, createStore, compose, applyMiddleware} from 'redux';
-import userReducer from './user/reducer';
+import teamReducer from './team/reducer';
 import thunk, { ThunkMiddleware } from "redux-thunk";
 import { AppActions } from './actions';
 
 const storeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const rootReducer = combineReducers({
-  user: userReducer,
+  team: teamReducer,
 })
 
 export type AppState = ReturnType<typeof rootReducer>

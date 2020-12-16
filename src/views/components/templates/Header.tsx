@@ -10,17 +10,17 @@ import logo from '../../../../src/images/logo.png';
 import { AppState } from '../../../store/store';
 
 import { useDispatch } from 'react-redux';
-import { deleteUser } from '../../../store/user/actions';
+import { deleteTeam } from '../../../store/team/actions';
 
 
 const Header: React.FC = () => {
-  const userState = useSelector((state: AppState) => state.user);
+  const teamState = useSelector((state: AppState) => state.team);
   const dispatch = useDispatch();
 
   return(
     <StyledHeader>
       <Wrapper>
-        {userState.login ?
+        {teamState.login ?
           <LinkWrapper>
             <Menu to='/players/1'>
               <Image width='20px' height='20px' display='inline-block' src={menu} />
@@ -30,12 +30,12 @@ const Header: React.FC = () => {
               <Image width='20px' height='20px' display='inline-block' src={logo} />
             </Logo>
             <MenuList>
-              <StyledLink to='/players'>{userState.name}</StyledLink>
+              <StyledLink to='/mypage'>{teamState.email}</StyledLink>
               <StyledLink
                 to='/'
                 onClick={() => {
-                  localStorage.removeItem('user');
-                  dispatch(deleteUser())
+                  localStorage.removeItem('team');
+                  dispatch(deleteTeam())
                 }}
               >
                 ログアウト

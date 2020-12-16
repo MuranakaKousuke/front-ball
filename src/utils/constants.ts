@@ -1,0 +1,1 @@
+export const RAILS_SERVER = 'http://localhost:3001';
