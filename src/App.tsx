@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect, RouteProps, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect, RouteProps } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from './store/store';
@@ -15,8 +15,8 @@ import MyTeam from './views/pages/MyTeam';
 import TeamDetail from './views/pages/TeamDetail';
 import TeamEdit from './views/pages/TeamEdit';
 import Players from './views/pages/Players';
-import PlayerDetail from './views/pages/PlayerDetail';
 import PlayerNew from './views/pages/PlayerNew';
+import PlayerDetail from './views/pages/PlayerDetail';
 import PlayerEdit from './views/pages/PlayerEdit';
 import Scores from './views/pages/Scores';
 import ScoreNew from './views/pages/ScoreNew';
@@ -29,9 +29,6 @@ import Recruits from './views/pages/Recruits';
 import RecruitNew from './views/pages/RecruitNew';
 import RecruitDetail from './views/pages/RecruitDetail';
 import RecruitEdit from './views/pages/RecruitEdit';
-
-
-
 
 function App() {
   const dispatch = useDispatch();
@@ -59,14 +56,11 @@ function App() {
   }
 
   // ---------- マイチームのユーザーしか入ることの出来ないページを設定 ----------
-  type PrivateRouteParamsTypes = {
-    team_id: string
-  }
-  const PrivateRoute = (props: RouteProps) => {
+  const PrivateRoute = (props: any) => {
     const id = useSelector((state: AppState) => state.team.id);
-    const { team_id } = useParams<PrivateRouteParamsTypes>()
-
+    const team_id = props.computedMatch.params.team_id;
     const success = (id === Number(team_id) )
+
     if (!success) console.log('お探しのページはマイチームユーザーしか入れません')
     return success ? <Route {...props} /> : <Redirect to="/" />;
   }

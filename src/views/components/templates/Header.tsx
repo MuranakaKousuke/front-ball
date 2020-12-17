@@ -25,14 +25,14 @@ const Header: React.FC = () => {
           <MenuBar>
             <Link to='/players/1'><Image width='20px' height='20px' display='inline-block' src={menu} /></Link>
           </MenuBar>
-          <Logo to='/'>
+          <Logo to='/teams/1/edit'>
             <LargeText fontWeight='bold' backgroundColor='#8cc640' color='white'>クサプロ</LargeText>
             <Image width='20px' height='20px' display='inline-block' src={logo} />
           </Logo>
           <MenuLists>
             {teamState.login ?
               <>
-                <Link to='/mypage'>{teamState.email}</Link>
+                <Link to='/myteam'>{teamState.email}</Link>
                 <Link to='/' onClick={() => {localStorage.removeItem('team'); dispatch(deleteTeam());}}> ログアウト</Link>
               </>
             :
