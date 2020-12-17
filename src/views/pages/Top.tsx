@@ -1,8 +1,10 @@
 import React from 'react';
 
+import TopTemplate from '../components/templates/TopTemplate';
+
 const Top: React.FC = () => {
   return(
-    <h1>Top</h1>
+    <TopTemplate />
   );
 }
 

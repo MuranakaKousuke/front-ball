@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import PlayerHeader from '../organisms/Player/PlayerHeader';
 
 import { StatusLabel } from '../atoms/Label';
-import { SmallText , StatusText, BallisticText, StatusLankText, SpecialLabelText, SpecialLankText } from '../atoms/InlineText';
+import { StatusText, BallisticText, StatusLankText, SpecialLabelText, SpecialLankText } from '../atoms/InlineText';
 
-const Player = () => {
+const PlayerTemplate = () => {
   return (
     <Container>
       <PlayerHeader />
@@ -111,7 +111,7 @@ const Player = () => {
   );
 }
 
-export default Player;
+export default PlayerTemplate;
 
 const Container = styled.div`
   width: 100%;
