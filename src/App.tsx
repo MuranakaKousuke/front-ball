@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route, Redirect, RouteProps } from 're
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from './store/store';
 
-import { useComponentWillMount } from './hooks/lifeCycle';
 import { fetchTeam } from './store/team/actions';
 
 import Container from './views/components/templates/Container';
@@ -34,14 +33,12 @@ function App() {
   const dispatch = useDispatch();
   const login = useSelector((state: AppState) => state.team.login);
 
-  // ---------- willMountで過去のログイン履歴がlocalStorageにあればログインする ----------
-  const loginCheck = () => {
+  // ---------- 過去のログイン履歴がlocalStorageにあればログインする ----------
     if (!login) {
       const team = localStorage.getItem('team');
       team && dispatch(fetchTeam(JSON.parse(team)));
     }
-  }
-  useComponentWillMount(loginCheck);
+
 
   // ---------- 未ログインユーザーしか入ることの出来ないページを設定 ----------
   const GuestRoute = (props: RouteProps) => {
