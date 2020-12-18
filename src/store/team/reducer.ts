@@ -4,13 +4,19 @@ import { FETCH_TEAM, DELETE_TEAM, TeamActionsTypes } from './actions';
 export type teamState = {
   login: boolean;
   id: number | null;
-  email: string | null;
+  name: string | null;
+  town: string | null;
+  introduction: string | null;
+  prefectureId: number | null;
 }
 
 export const initialState: teamState = {
   login: false,
   id: null,
-  email: null,
+  name: null,
+  town: null,
+  introduction: null,
+  prefectureId: null,
 }
 
 // -------------------- Reducer --------------------
@@ -21,7 +27,10 @@ const teamReducer = (state = initialState, action: TeamActionsTypes): teamState 
         ...state,
         login: action.payload.login,
         id: action.payload.id,
-        email: action.payload.email,
+        name: action.payload.name,
+        town: action.payload.town,
+        introduction: action.payload.introduction,
+        prefectureId: action.payload.prefectureId,
       }
     case DELETE_TEAM:
       return {

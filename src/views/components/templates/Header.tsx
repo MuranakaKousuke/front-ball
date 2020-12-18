@@ -11,9 +11,6 @@ import Image from '../atoms/Image';
 import menu from '../../../../src/images/menu.png';
 import logo from '../../../../src/images/logo.png';
 
-
-
-
 const Header: React.FC = () => {
   const teamState = useSelector((state: AppState) => state.team);
   const dispatch = useDispatch();
@@ -32,7 +29,7 @@ const Header: React.FC = () => {
           <MenuLists>
             {teamState.login ?
               <>
-                <Link to='/myteam'>{teamState.email}</Link>
+                <Link to='/myteam'>{teamState.name}</Link>
                 <Link to='/' onClick={() => {localStorage.removeItem('team'); dispatch(deleteTeam());}}> ログアウト</Link>
               </>
             :

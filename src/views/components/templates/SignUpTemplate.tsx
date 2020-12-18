@@ -24,6 +24,7 @@ const SignUpTemplate = () => {
       password_confirmation: passwordConfirmation
     })
     .then((res) => {
+      console.log(res)
       if (res.data.results) {
         console.log('登録に成功しました!')
         history.push('login/new')
