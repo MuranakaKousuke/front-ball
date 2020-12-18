@@ -1,4 +1,4 @@
-import { FETCH_TEAM, DELETE_TEAM, TeamActionsTypes } from './actions';
+import { FETCH_TEAM, UPDATE_TEAM, DELETE_TEAM, TeamActionsTypes } from './actions';
 
 // -------------------- InitialState --------------------
 export type teamState = {
@@ -25,7 +25,16 @@ const teamReducer = (state = initialState, action: TeamActionsTypes): teamState 
     case FETCH_TEAM:
       return {
         ...state,
-        login: action.payload.login,
+        login: true,
+        id: action.payload.id,
+        name: action.payload.name,
+        town: action.payload.town,
+        introduction: action.payload.introduction,
+        prefectureId: action.payload.prefectureId,
+      }
+    case UPDATE_TEAM:
+      return {
+        ...state,
         id: action.payload.id,
         name: action.payload.name,
         town: action.payload.town,

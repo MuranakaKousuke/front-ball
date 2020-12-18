@@ -39,7 +39,6 @@ function App() {
       team && dispatch(fetchTeam(JSON.parse(team)));
     }
 
-
   // ---------- 未ログインユーザーしか入ることの出来ないページを設定 ----------
   const GuestRoute = (props: RouteProps) => {
     if (login) console.log('お探しのページは未ログインユーザーしか入れません')
