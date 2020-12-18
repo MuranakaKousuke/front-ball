@@ -20,9 +20,9 @@ const Header: React.FC = () => {
       <Wrapper>
         <LinkWrapper>
           <MenuBar>
-            <Link to='/players/1'><Image width='20px' height='20px' display='inline-block' src={menu} /></Link>
+            <Link to='/'><Image width='20px' height='20px' display='inline-block' src={menu} /></Link>
           </MenuBar>
-          <Logo to='/teams/1/edit'>
+          <Logo to='/'>
             <LargeText fontWeight='bold' backgroundColor='#8cc640' color='white'>クサプロ</LargeText>
             <Image width='20px' height='20px' display='inline-block' src={logo} />
           </Logo>

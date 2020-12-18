@@ -83,9 +83,9 @@ function App() {
           <LoginRoute exact path="/opponents/new" component={OpponentNew} /> {/* 対戦相手募集登録 */}
           <LoginRoute exact path="/opponents/:opponent_id" component={OpponentDetail} /> {/* 対戦相手募集詳細 */}
           <PrivateRoute exact path="/teams/:team_id/opponents/:opponent_id/edit" component={OpponentEdit} /> {/* 対戦相手募集編集 */}
-          <GuestRoute exact path="/recruits" component={Recruits} /> {/* 選手募集一覧 */}
-          <GuestRoute exact path="/recruits/new" component={RecruitNew} /> {/* 選手募集登録 */}
-          <GuestRoute exact path="/recruits/:recruit_id" component={RecruitDetail} /> {/* 選手募集詳細 */}
+          <Route exact path="/recruits" component={Recruits} /> {/* 選手募集一覧 */}
+          <LoginRoute exact path="/recruits/new" component={RecruitNew} /> {/* 選手募集登録 */}
+          <Route exact path="/recruits/:recruit_id" component={RecruitDetail} /> {/* 選手募集詳細 */}
           <PrivateRoute exact path="/teams/:team_id//recruits/:recruit_id/edit" component={RecruitEdit} /> {/* 選手募集編集 */}
           <Redirect to="/" />
         </Switch>
