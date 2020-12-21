@@ -21,7 +21,7 @@ const teamsReducer = (state = initialState, action: TeamsActionsTypes): teamsSta
       return {
         ...state,
         byId: { ...state.byId, ...teams },
-        allIds: [...state.allIds, ...teamsIds]
+        allIds: Array.from(new Set([...state.allIds, ...teamsIds]))
       }
     case FETCH_TEAM:
       const team = action.payload;
@@ -31,7 +31,7 @@ const teamsReducer = (state = initialState, action: TeamsActionsTypes): teamsSta
           ...state.byId,
           [team.id]: team,
         },
-        allIds: [...state.allIds, team.id]
+        allIds: Array.from(new Set([...state.allIds, team.id]))
       }
     case UPDATE_TEAM:
       const updateTeam = action.payload;
