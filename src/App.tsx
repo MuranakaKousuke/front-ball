@@ -2,9 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect, RouteProps } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { AppState } from './store/store';
+import { AppState } from './store/reducer';
 
-import { fetchTeam } from './store/team/actions';
+import { fetchTeam } from './store/teams/actions';
+import { changeLogin } from './store/login/actions';
 
 import Container from './views/components/templates/Container';
 import Top from './views/pages/Top';
@@ -31,11 +32,14 @@ import RecruitEdit from './views/pages/RecruitEdit';
 
 function App() {
   const dispatch = useDispatch();
-  const login = useSelector((state: AppState) => state.team.login);
+  const loginState = useSelector((state: AppState) => state.login);
+  const login = loginState.success;
+  const myteamId = loginState.teamId;
 
   // ---------- 過去のログイン履歴がlocalStorageにあればログインする ----------
     if (!login) {
       const team = localStorage.getItem('team');
+      team && dispatch(changeLogin(JSON.parse(team).id));
       team && dispatch(fetchTeam(JSON.parse(team)));
     }
 
@@ -53,9 +57,8 @@ function App() {
 
   // ---------- マイチームのユーザーしか入ることの出来ないページを設定 ----------
   const PrivateRoute = (props: any) => {
-    const id = useSelector((state: AppState) => state.team.id);
-    const team_id = props.computedMatch.params.team_id;
-    const success = (id === Number(team_id) )
+    const teamId = props.computedMatch.params.team_id;
+    const success = (myteamId === Number(teamId) )
 
     if (!success) console.log('お探しのページはマイチームユーザーしか入れません')
     return success ? <Route {...props} /> : <Redirect to="/" />;

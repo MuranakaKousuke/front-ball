@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { AppState } from '../../../store/store';
-import { deleteTeam } from '../../../store/team/actions';
+import { AppState } from '../../../store/reducer';
+import { changeLogout } from '../../../store/login/actions';
 
 import Link from '../atoms/Link';
 import { LargeText }  from '../atoms/InlineText';
@@ -12,7 +12,12 @@ import menu from '../../../../src/images/menu.png';
 import logo from '../../../../src/images/logo.png';
 
 const Header: React.FC = () => {
-  const teamState = useSelector((state: AppState) => state.team);
+  const loginState = useSelector((state: AppState) => state.login);
+  const login = loginState.success;
+  const myteamId = loginState.teamId;
+
+  const teamsState = useSelector((state: AppState) => state.teams)
+  const myteam = myteamId && teamsState.byId[myteamId];
   const dispatch = useDispatch();
 
   return(
@@ -27,10 +32,14 @@ const Header: React.FC = () => {
             <Image width='20px' height='20px' display='inline-block' src={logo} />
           </Logo>
           <MenuLists>
-            {teamState.login ?
+            {login && myteam ?
               <>
-                <Link to='/myteam'>{teamState.name}</Link>
-                <Link to='/' onClick={() => {localStorage.removeItem('team'); dispatch(deleteTeam());}}> ログアウト</Link>
+                <Link to='/myteam'>{myteam.name}</Link>
+                <Link to='/' onClick={() => {
+                  localStorage.removeItem('team');
+                  dispatch(changeLogout());
+                  }}
+                > ログアウト</Link>
               </>
             :
               <>

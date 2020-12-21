@@ -6,7 +6,8 @@ import axios from 'axios';
 import { RAILS_SERVER } from '../../../utils/constants';
 
 import { useDispatch } from 'react-redux';
-import { fetchTeam } from '../../../store/team/actions';
+import { changeLogin } from '../../../store/login/actions';
+import { fetchTeam } from '../../../store/teams/actions';
 import { useHistory } from 'react-router-dom';
 
 type FormData = {
@@ -25,12 +26,13 @@ const SignInTemplate: React.FC = () => {
       password: password,
     })
     .then((res) => {
-      if (res.data.login) {
-        dispatch(fetchTeam(res.data))
+      if (res.data.results) {
+        const team = res.data.team
+        dispatch(fetchTeam(team))
+        dispatch(changeLogin(team.id))
         history.push('/')
         // localStrageに保存する
-        const teamStrage = res.data
-        localStorage.setItem('team', JSON.stringify(teamStrage));
+        localStorage.setItem('team', JSON.stringify(team));
       } else {
         console.log('ログインに失敗しました!')
       }

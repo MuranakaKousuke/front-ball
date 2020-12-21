@@ -8,12 +8,12 @@ import axios from 'axios';
 import { RAILS_SERVER } from '../../../utils/constants';
 
 import { useDispatch } from 'react-redux';
-import { teamState } from '../../../store/team/reducer';
-import { updateTeam } from '../../../store/team/actions';
+import { updateTeam } from '../../../store/teams/actions';
+import { Team } from '../../../store/teams/types';
 
-type TemplateProps = teamState;
+type TemplateProps = Team;
 type FormData = Pick<
-  teamState,
+  Team,
   'name' | 'prefectureId' | 'town' | 'introduction'
 >;
 

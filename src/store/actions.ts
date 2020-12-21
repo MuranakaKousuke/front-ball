@@ -1,3 +1,8 @@
-import { TeamActionsTypes } from './team/actions';
+import { LoginActionsTypes } from './login/actions';
+import { TeamsActionsTypes } from './teams/actions';
 
-export type AppActions = TeamActionsTypes
+type AppActions =
+  LoginActionsTypes |
+  TeamsActionsTypes
+
+export default AppActions;
